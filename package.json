@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "./build.sh"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iSPIRT/healthstack.git",
-    "yaml2json": "yaml2json src/spec/axis.yaml > dst/spec/axis.json"
+    "url": "git+https://github.com/iSPIRT/healthstack.git"
   },
   "author": "",
   "license": "ISC",

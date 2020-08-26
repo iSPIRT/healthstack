@@ -11,4 +11,8 @@ for filename in src/spec/*.yaml; do
     node_modules/yamljs/bin/yaml2json $filename > build/spec/$filenamewithoutext
 done
 
+echo "http://localhost:4321/"
+
 cd build && python -m SimpleHTTPServer 4321
+
+
