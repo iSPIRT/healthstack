@@ -1,0 +1,24 @@
+{
+  "name": "healthstack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iSPIRT/healthstack.git",
+    "yaml2json": "yaml2json src/spec/axis.yaml > dst/spec/axis.json"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iSPIRT/healthstack/issues"
+  },
+  "homepage": "https://github.com/iSPIRT/healthstack#readme",
+  "dependencies": {
+    "yaml2json": "^1.0.2",
+    "yamljs": "^0.3.0"
+  }
+}
