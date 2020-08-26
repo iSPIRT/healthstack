@@ -1,4 +1,4 @@
-# healthstack
+# Healthstack
 
 <ul>
     <li>
