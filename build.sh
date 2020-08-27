@@ -5,7 +5,7 @@ find src -name \*.html -exec cp {} build \;
 find src -name \*.md -exec cp {} build \;
 cp -r src/media build/media
 
-for filename in src/spec/*.yaml; do
+for filename in spec/*.yaml; do
     basename=$(basename "$filename")
     filenamewithoutext="${basename%.*}.json"
     echo $basename $filenamewithoutext
