@@ -3,6 +3,7 @@ mkdir build
 mkdir build/spec
 find src -name \*.html -exec cp {} build \;
 find src -name \*.md -exec cp {} build \;
+cp -r src/media build/media
 
 for filename in src/spec/*.yaml; do
     basename=$(basename "$filename")
