@@ -7,9 +7,10 @@ cp -r src/media build/media
 
 for filename in spec/*.yaml; do
     basename=$(basename "$filename")
-    filenamewithoutext="${basename%.*}.json"
-    echo $basename $filenamewithoutext
-    node_modules/yamljs/bin/yaml2json $filename > build/spec/$filenamewithoutext
+    jsonfilename="${basename%.*}.json"
+    echo $basename $jsonfilename
+    node_modules/yamljs/bin/yaml2json $filename > build/spec/$jsonfilename
+    python3 make_api_docs.py $jsonfilename
 done
 
 
