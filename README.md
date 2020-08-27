@@ -12,8 +12,8 @@ If you are interested in contributing
 
 ## About this repo
 
-- The Spec is under the `spec` folder
-- The rest of the repository is is the [Website](https://developers.ispirt.in/#/?id=healthstack) code and content (built using [docsify](https://github.com/docsifyjs/docsify/) framework)
+- The Spec for HIF is under the `spec` folder
+- The rest of the repository is the [Website](https://developers.ispirt.in/#/?id=healthstack) code and content (built using [docsify](https://github.com/docsifyjs/docsify/) framework)
 
 ### Local development
 
