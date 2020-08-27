@@ -1,4 +1,4 @@
-# healthstack
+# Healthstack
 
 [Website](https://developers.ispirt.in/#/?id=healthstack)
 
