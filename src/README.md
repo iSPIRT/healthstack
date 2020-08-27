@@ -12,7 +12,7 @@ Some health information flows involve the transfer of personal information i.e. 
 
 HIFs may involve transfer of information that is not personally-identifiable as well. Such information may be non-personal by its very nature (e.g., profile details of a hospital that collects health information of users) or that has been made non-personal by applying anonymization techniques on personal health information. Such HIFs are referred to as non-personal HIFs.
 
-## Technology Specifications
+## API documentation
 
 <ul>
     <li>
@@ -25,5 +25,7 @@ HIFs may involve transfer of information that is not personally-identifiable as 
         <a href="./health-repository.html">Health Repository</a>
     </li>
 </ul>
+
+## Health Information Flows & Technology Specifications
 
 <iframe src="//www.slideshare.net/slideshow/embed_code/key/DUP99kAKROydPS" width="668" height="714" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/ProductNation/health-information-flows-technical-standards-v-05" title="Health Information Flows Technical Standards - V 0.5" target="_blank">Health Information Flows Technical Standards - V 0.5</a> </strong> from <strong><a href="//www.slideshare.net/ProductNation" target="_blank">ProductNation/iSPIRT</a></strong> </div>
