@@ -35,4 +35,4 @@ HIFs may involve transfer of information that is not personally-identifiable as 
 
 ## Contributing
 
-[See out github repository to contribute to the website or the specs](https://github.com/iSPIRT/healthstack)
+See our [github](https://github.com/iSPIRT/healthstack)  to contribute to the website or the specs
