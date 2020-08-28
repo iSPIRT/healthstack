@@ -4,6 +4,7 @@ mkdir build/spec
 find src -name \*.html -exec cp {} build \;
 find src -name \*.md -exec cp {} build \;
 cp -r src/media build/media
+cp -r src/static build/static
 
 for filename in spec/*.yaml; do
     basename=$(basename "$filename")
