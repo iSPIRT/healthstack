@@ -203,7 +203,6 @@ paths:
     post:
       tags:
         - link
-        - hip facing
       parameters:
         - $ref: "#/components/parameters/authorization"
       summary: API for HIP initiated care-context linking for patient
@@ -312,80 +311,6 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-  /consent-requests:
-    post:
-      tags:
-        - consent
-      deprecated: true
-      summary: Create consent request
-      description: Creates a consent request to get data about a patient by HIU user.
-      operationId: createConsentRequest
-      parameters:
-        - $ref: '#/components/parameters/authorization'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ConsentRequest'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/ConsentRequest'
-      responses:
-        '200':
-          description: Successful creation of consent request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: string
-                    format: uuid
-            application/xml:
-              schema:
-                type: object
-                properties:
-                  consentRequest:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        format: uuid
-        '400':
-          description:  >
-            **Causes:**
-              * Invalid data being sent such as patient doesn't exist in the system.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '401':
-          description:  >
-            **Causes:**
-              * Expired/Invalid token.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: >
-            **Causes:**
-              * Downstream system(s) is down.
-              * Unhandled exceptions.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
   /v0.5/consents/fetch:
     post:
       tags:
@@ -407,64 +332,6 @@ paths:
           description:  >
             **Causes:**
               * Invalid data sent
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '401':
-          description:  >
-            **Causes:**
-              * Expired/Invalid token.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: >
-            **Causes:**
-              * Downstream system(s) is down.
-              * Unhandled exceptions.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-  /consents/{consent-id}:
-    get:
-      tags:
-        - consent
-      deprecated: true
-      summary: Get a specific consent
-      description: Fetch a consent artefact associated with the consent-id
-      operationId: fetchConsentArtefact
-      parameters:
-        - $ref: '#/components/parameters/authorization'
-        - name: consent-id
-          in: path
-          required: true
-          schema:
-            type: string
-            format: uuid
-      responses:
-        '200':
-          description: a consent artefact.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConsentArtefactRepresentation'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/ConsentArtefactRepresentation'
-        '404':
-          description: Consent artefact doesn't exist.
           content:
             application/json:
               schema:
@@ -742,61 +609,6 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-  /health-information/request:
-    post:
-      tags:
-        - data flow
-      deprecated: true
-      summary: Request for health information
-      description: The HIU submits the Consent Artefact ID of the consent required for fetching helath information from the HIP(s). A transaction ID is generated and returned.
-      parameters:
-        - $ref: '#/components/parameters/authorization'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/HealthInformationRequest'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/HealthInformationRequest'
-      responses:
-        '204':
-          description: Accepted.
-        '400':
-          description: >
-            **Causes:**
-              * Consent artefact Id is invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '401':
-          description: >
-            **Causes:**
-              * Unauthorized HIU
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: >
-            **Causes:**
-              * Downstream system(s) is down.
-              * Unhandled exceptions.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
   /v0.5/health-information/notify:
     post:
       tags:
@@ -856,37 +668,6 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-  /health-information/notification:
-    post:
-      tags:
-        - data flow
-      deprecated: true
-      description: Notifications corresponding to events during data flow
-      parameters:
-        - $ref: '#/components/parameters/authorization'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/HINotification'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/HINotification'
-      responses:
-        '204':
-          description: Notification is Accepted
-        '400':
-          description: >
-            **Causes:**
-              * Invalid Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
   /v0.5/heartbeat:
     get:
       tags:
@@ -906,7 +687,6 @@ paths:
     post:
       tags:
         - identification
-        - hiu facing
       summary: Identify a patient by her consent-manager user-id
       description: >
         This API is meant for identify to patient given her consent-manager-user-id. CM subsequently makes the /on-find Gateway API call with results. 
@@ -954,15 +734,15 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-  /hip-links/link:
+  
+  /v0.5/users/auth/fetch-modes:
     post:
       tags:
-        - link
+        - user auth
         - hip facing
-      summary: Link patient's care contexts
-      deprecated: true
+      summary: Get a patient's authentication modes by her consent-manager user-id relevant to specified purpose
       description: >
-        Notification from Hip to consent manager for a patient's carecontext.
+        This API is meant for identify supported authentication modes for a patient given a specific purpose. For  response callback API please see Gateway spec /auth/on-fetch-modes. Note that as of now, only KYC purpose is applicable for HIU, for HIP the purposes KYC, LINK, KYC_AND_LINK are applicable.
       parameters:
         - $ref: "#/components/parameters/authorization"
       requestBody:
@@ -970,24 +750,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/HipInitiatedLinkRequest'
+              $ref: '#/components/schemas/PatientAuthModeQueryRequest'
           application/xml:
             schema:
-              $ref: '#/components/schemas/HipInitiatedLinkRequest'
+              $ref: '#/components/schemas/PatientAuthModeQueryRequest'
       responses:
         '202':
-          description: Request accepted
+          description: Request Accepted
         '400':
           description: >
-            **Causes:**
-              * Consent manager user id is not provided
-              * Patient reference number is not provided
-              * Care context references are not provided
+            Invalid request, required attributes not provided
           content:
             application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-            application/xml:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
         '401':
@@ -1074,10 +848,11 @@ paths:
         - user auth
       summary: Confirmation request sending token, otp or other authentication details from HIP for confirmation
       description: >
-        This API is called by HIPs to confirm authentication of users. The transactionId   retuned by the previous callback API /users/auth/on-init has to sent. If Authentication is successful the callback API will send an "access token" for subsequent purpose specific API calls. Note only **credential.token** or **credential.demographic** should be sent
-          1. demographic details are only required for AADHAAR demographic auth as of now. 
-          2. demographic details are required only in MEDIATED cases and if the **auth.mode** so demands. e.g. if **auth.mode** is AADHAAR_DEMO. In case of AADHAAR demographic authentication, the name, gender and DOB must be exactly as specified in AADHAAR registration.
+        This API is called by HIP/HIUs to confirm authentication of users. The transactionId returned by the previous callback API /users/auth/on-init must be sent. If Authentication is successful the callback API will send an "access token" for subsequent purpose specific API calls. Note only **credential.authCode** or **credential.demographic** should be sent
+          1. demographic details are only required for  demographic auth as of now. 
+          2. demographic details are required only in MEDIATED cases and if the **auth.mode** so demands. e.g. if **auth.mode** is DEMOGRAPHICS. Usually for demographic authentication, the name, gender and DOB must be exactly as specified in User Account.
           3. demographic.identifier is optional, however maybe required if authentication so mandates. 
+          4. credential.authCode is required for other MEDIATED authentication like MOBILE_OTP, AADHAAR_OTP.
       parameters:
         - $ref: "#/components/parameters/authorization"
       requestBody:
@@ -1170,6 +945,11 @@ components:
       example: a1s2c932-2f70-3ds3-a3b5-2sfd46b12a18d
     PatientDiscoveryResult:
       type: object
+      required:
+        - requestId
+        - timestamp
+        - transactionId
+        - resp
       properties:
         requestId:
           type: string
@@ -1201,6 +981,10 @@ components:
       enum: [MOBILE, MR]
     PatientRepresentation:
       type: object
+      required:
+        - referenceNumber
+        - display
+        - careContexts
       properties:
         referenceNumber:
           type: string
@@ -1230,6 +1014,11 @@ components:
         name: Tag
     PatientLinkReferenceResult:
       type: object
+      required:
+        - requestId
+        - timestamp
+        - transactionId
+        - resp
       properties:
         requestId:
           type: string
@@ -1242,6 +1031,9 @@ components:
           $ref: '#/components/schemas/UuidSchema'
         link:
           type: object
+          required:
+            - referenceNumber
+            - authenticationType
           properties:
             referenceNumber:
               type: string
@@ -1257,8 +1049,7 @@ components:
     Meta:
       type: object
       required:
-        - mode
-        - value
+        - communicationMedium
       properties:
         communicationMedium:
           type: string
@@ -1272,6 +1063,9 @@ components:
         name: Meta
     Error:
       type: object
+      required:
+        - code
+        - message
       properties:
         code:
           type: integer
@@ -1282,6 +1076,10 @@ components:
         name: Error
     PatientLinkResult:
       type: object
+      required:
+        - requestId
+        - timestamp
+        - resp
       properties:
         requestId:
           type: string
@@ -1292,6 +1090,10 @@ components:
           $ref: '#/components/schemas/TimestampSchema'
         patient:
           type: object
+          required:
+            - referenceNumber
+            - display
+            - careContexts
           properties:
             referenceNumber:
               type: string
@@ -1305,27 +1107,6 @@ components:
           $ref: '#/components/schemas/Error'
         resp:
           $ref: '#/components/schemas/RequestReference'
-    HealthInformationRequest:
-      type: object
-      required:
-        - requestId
-        - consent
-        - dataPushUrl
-        - keyMaterial
-        - dateRange
-      properties:
-        requestId:
-          $ref: '#/components/schemas/UuidSchema'
-        timestamp:
-          $ref: '#/components/schemas/TimestampSchema'
-        consent:
-          $ref: '#/components/schemas/consent'
-        dateRange:
-          $ref: '#/components/schemas/DateRange'
-        dataPushUrl:
-          type: string
-        keyMaterial:
-          $ref: '#/components/schemas/keyMaterial'
     HIRequest:
       type: object
       required:
@@ -1352,7 +1133,7 @@ components:
             dataPushUrl:
               type: string
             keyMaterial:
-              $ref: '#/components/schemas/keyMaterial'
+              $ref: '#/components/schemas/KeyMaterial'
     consent:
       type: object
       required:
@@ -1375,22 +1156,16 @@ components:
     HITypeEnum:
       type: string
       enum:
-        - Condition
-        - Observation
-        - MedicationRequest
+        - OPConsultation
+        - Prescription
+        - DischargeSummary
         - DiagnosticReport
       xml:
         name: HIType
-    ConsentStatus:
-      type: string
-      enum:
-        - GRANTED
-        - EXPIRED
-        - DENIED
-        - REQUESTED
-        - REVOKED
     ConsentManagerPatientID:
       type: object
+      required:
+        - id
       properties:
         id:
           type: string
@@ -1414,12 +1189,20 @@ components:
           format: uri
     Permission:
       type: object
+      required:
+        - accessMode
+        - dateRange
+        - dataEraseAt
+        - frequency
       properties:
         accessMode:
           type: string
           enum: [VIEW, STORE, QUERY, STREAM]
         dateRange:
           type: object
+          required:
+            - from
+            - to
           properties:
             from:
               type: string
@@ -1453,12 +1236,12 @@ components:
             attribute: true
       xml:
         name: OrganizationResponse
-    keyMaterial:
+    KeyMaterial:
       type: object
       required:
         - cryptoAlg
         - curve
-        - DHPublicKey
+        - dhPublicKey
         - nonce
       properties:
         cryptoAlg:
@@ -1496,6 +1279,7 @@ components:
       type: object
       required:
         - requestId
+        - timestamp
         - consent
       properties:
         requestId:
@@ -1554,6 +1338,9 @@ components:
           example: Dr. Manju
         identifier:
           type: object
+          required:
+            - type
+            - value
           properties:
             type: 
               type: string
@@ -1564,56 +1351,12 @@ components:
             system:
               type: string
               example: https://www.mciindia.org
-    HINotification:
-      type: object
-      properties:
-        requestId:
-          type: string
-          format: uuid
-          description: a nonce, unique for each HTTP request. 
-          example: "499a5a4a-7dda-4f20-9b67-e24589627061"
-        timestamp:
-          $ref: '#/components/schemas/TimestampSchema'
-        transactionId:
-          $ref: '#/components/schemas/UuidSchema'
-        consentId:
-          $ref: '#/components/schemas/UuidSchema'
-        doneAt:
-          type: string
-          format: date-time
-        notifier:
-          type: object
-          properties:
-            type:
-              type: string
-              enum: [HIU, HIP]
-            id:
-              type: string
-              example: tmh
-        statusNotification:
-          type: object
-          properties:
-            sessionStatus:
-              type: string
-              enum: [TRANSFERRED, FAILED]
-            hipId:
-              type: string
-              example: max
-            statusResponses:
-              type: array
-              items:
-                type: object
-                properties:
-                  careContextReference:
-                    type: string
-                  hiStatus:
-                    type: string
-                    enum: [DELIVERED, OK, ERRORED]
-                    example: OK
-                  description:
-                    type: string
     HealthInformationNotification:
       type: object
+      required:
+        - requestId
+        - timestamp
+        - notification
       properties:
         requestId:
           type: string
@@ -1624,6 +1367,12 @@ components:
           $ref: '#/components/schemas/TimestampSchema'
         notification:
           type: object
+          required:
+            - consentId
+            - transactionId
+            - doneAt
+            - notifier
+            - statusNotification
           properties:
             consentId:
               $ref: '#/components/schemas/UuidSchema'
@@ -1634,6 +1383,9 @@ components:
               format: date-time
             notifier:
               type: object
+              required:
+                - type
+                - id
               properties:
                 type:
                   type: string
@@ -1643,6 +1395,9 @@ components:
                   example: 100005
             statusNotification:
               type: object
+              required:
+                - sessionStatus
+                - hipId
               properties:
                 sessionStatus:
                   type: string
@@ -1654,6 +1409,9 @@ components:
                   type: array
                   items:
                     type: object
+                    required:
+                      - careContextReference
+                      - hiStatus
                     properties:
                       careContextReference:
                         type: string
@@ -1663,70 +1421,6 @@ components:
                         example: OK
                       description:
                         type: string
-    ConsentArtefactRepresentation:
-      type: object
-      properties:
-        status:
-          $ref: '#/components/schemas/ConsentStatus'
-        consentDetail:
-          type: object
-          properties:
-            schemaVersion:
-              type: string
-              format: string
-            consentId:
-              type: string
-              format: uuid
-            createdAt:
-              type: string
-              format: date-time
-            patient:
-              $ref: '#/components/schemas/ConsentManagerPatientID'
-            careContexts:
-              type: array
-              items:
-                type: object
-                required:
-                  - patientReference
-                  - careContextReference
-                properties:
-                  patientReference:
-                    type: string
-                    example: batman@tmh
-                  careContextReference:
-                    type: string
-                    example: Episode1
-            purpose:
-              $ref: '#/components/schemas/UsePurpose'
-            hip:
-              type: object
-              allOf:
-                - $ref: '#/components/schemas/OrganizationRepresentation'
-                - xml:
-                    name: hip
-            hiu:
-              type: object
-              allOf:
-                - $ref: '#/components/schemas/OrganizationRepresentation'
-                - xml:
-                    name: hiu
-            consentManager:
-              type: object
-              allOf:
-                - $ref: '#/components/schemas/OrganizationRepresentation'
-                - xml:
-                    name: consentManager
-            requester:
-              $ref: '#/components/schemas/Requester'
-            hiTypes:
-              type: array
-              items:
-                $ref: '#/components/schemas/HITypeEnum'
-            permission:
-              $ref: '#/components/schemas/Permission'
-        signature:
-          type: string
-          example: Signature of CM as defined in W3C standards; Base64 encoded
     RequestReference:
       type: object
       required:
@@ -1770,6 +1464,10 @@ components:
           type: string
     HIPHealthInformationRequestAcknowledgement:
       type: object
+      required:
+        - requestId
+        - timestamp
+        - resp
       properties:
         requestId:
           type: string
@@ -1780,6 +1478,9 @@ components:
           $ref: '#/components/schemas/TimestampSchema'
         hiRequest:
           type: object
+          required:
+            - transactionId
+            - sessionStatus
           properties:
             transactionId: 
               type: string
@@ -1794,6 +1495,10 @@ components:
           $ref: '#/components/schemas/RequestReference'
     HIPConsentNotificationResponse:
       type: object
+      required:
+        - requestId
+        - timestamp
+        - resp
       properties:
         requestId:
           type: string
@@ -1810,6 +1515,10 @@ components:
           $ref: '#/components/schemas/RequestReference'
     HIUConsentNotificationResponse:
       type: object
+      required:
+        - requestId
+        - timestamp
+        - resp
       properties:
         requestId:
           type: string
@@ -1828,6 +1537,9 @@ components:
           $ref: '#/components/schemas/RequestReference'
     ConsentAcknowledgement:
       type: object
+      required:
+        - status
+        - consentId
       properties:
         status:
           type: string
@@ -1873,12 +1585,17 @@ components:
           properties:
             patient:
               type: object
+              required:
+                - id
               properties:
                 id:
                   type: string
                   example: hinapatel79@ncg
             requester:
               type: object
+              required:
+                - type
+                - id
               properties:
                 type: 
                   type: string
@@ -1886,48 +1603,6 @@ components:
                 id:
                   type: string
                   example: 100005
-    HipInitiatedLinkRequest:
-      type: object
-      properties:
-        requestId:
-          type: string
-          format: uuid
-        timestamp:
-          $ref: '#/components/schemas/TimestampSchema'
-        link:
-          type: object
-          properties:
-            cmId:
-              type: string
-            hipId:
-              type: string
-            patient:
-              $ref: '#/components/schemas/HipInitiatedPatient'
-          xml:
-            name: HipInitiatedLinkRequest
-    HipInitiatedLinkCareContext:
-      type: object
-      properties:
-        referenceNumber:
-          type: string
-        display:
-          type: string
-      xml:
-        name: Tag
-    HipInitiatedPatient:
-      type: object
-      properties:
-        referenceNumber:
-          type: string
-        display:
-          type: string
-        careContexts:
-          type: array
-          items:
-            $ref: '#/components/schemas/HipInitiatedLinkCareContext'
-          xml:
-            name: careContexts
-            wrapped: true
     PatientAuthInitRequest:
       type: object
       required:
@@ -1945,21 +1620,16 @@ components:
         query:
           type: object
           required:
-            - patient
             - purpose
             - requester
+            - id
           properties:
-            patient:
-              type: object
-              properties:
-                id:
-                  type: string
-                  example: "hinapatel@ncg"
-                  description: id  of the patient understood by the CM
-            purpose:
+            id:
               type: string
-              enum: [LINK]
-              description: what is the purpose of user auth
+              example: "hinapatel@ncg"
+              description: id  of the patient understood by the CM
+            purpose:
+              $ref: '#/components/schemas/PatientAuthPurpose'
             authMode:
               $ref: '#/components/schemas/AuthenticationMode'
             requester:
@@ -1971,7 +1641,7 @@ components:
               properties:
                 type: 
                   type: string
-                  enum: [HIP]
+                  enum: [HIP, HIU]
                 id:
                   type: string
                   example: 100005
@@ -1980,6 +1650,7 @@ components:
       required:
         - requestId
         - timestamp
+        - tranasctionId
         - credential
       properties:
         requestId:
@@ -1994,7 +1665,7 @@ components:
         credential:
           type: object
           properties:
-            token:
+            authCode:
               type: string
             demographic:
               $ref: '#/components/schemas/PatientDemographic'
@@ -2005,11 +1676,11 @@ components:
         - name
         - gender
         - dateOfBirth
-      description: demographic details are only required for AADHAAR demographic auth at this point, in which case identifier.Type must be AADHAAR. 
+      description: demographic details are only required for demographic auth at this point. 
       properties:
         name: 
           type: string
-          example: "jankidas@ncg"
+          example: "janki das"
         gender:
           $ref: '#/components/schemas/PatientGender'
         dateOfBirth:
@@ -2020,6 +1691,9 @@ components:
           $ref: '#/components/schemas/Identifier'
     Identifier:
       type: object
+      required:
+        - type
+        - value
       properties:
         type:
           $ref: '#/components/schemas/IdentifierType'
@@ -2078,10 +1752,53 @@ components:
                 wrapped: true
     AuthenticationMode:
       type: string
-      enum: ['M0BILE_OTP', 'MOBILE_APP', 'AADHAAR_DEMO', 'AADHAAR_OTP']
+      enum: ['M0BILE_OTP', 'DIRECT', 'AADHAAR_OTP', 'DEMOGRAPHICS']
       description: > 
         Subjected to CM specific capability
          1. MOBILE_OTP - for SMS OTP
-         2. MOBILE_APP - for auth through apps (usually direct)
+         2. DIRECT - for auth through apps (usually direct)
          3. AADHAAR_OTP - for auth using OTP sent to Aadhaar number
-         4. AADHAAR_DEMO - for auth using Aadhaar demographic.
+         4. DEMOGRAPHICS - for auth using demographic.
+    
+    PatientAuthPurpose:
+      type: string
+      enum: [LINK, KYC, KYC_AND_LINK]
+      description: what is the purpose of user auth
+    PatientAuthModeQueryRequest:
+      type: object
+      required:
+        - requestId
+        - timestamp
+        - query
+      properties:
+        requestId:
+          type: string
+          format: uuid
+          description: a nonce, unique for each HTTP request
+          example: 5f7a535d-a3fd-416b-b069-c97d021fbacd
+        timestamp:
+          $ref: '#/components/schemas/TimestampSchema'
+        query:
+          type: object
+          required:
+            - id
+            - purpose
+            - requester
+          properties:
+            id:
+              type: string
+              example: hinapatel79@ncg
+            purpose:
+              $ref: '#/components/schemas/PatientAuthPurpose'
+            requester:
+              type: object
+              required:
+                - id
+                - type
+              properties:
+                type: 
+                  type: string
+                  enum: [HIP, HIU]
+                id:
+                  type: string
+                  example: 100005
