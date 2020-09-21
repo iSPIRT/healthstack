@@ -2279,7 +2279,7 @@ components:
       properties:
         communicationMedium:
           type: string
-          enum: ['M0BILE', 'EMAIL']
+          enum: ['MOBILE', 'EMAIL']
         communicationHint:
           type: string
         communicationExpiry:
@@ -3698,16 +3698,18 @@ components:
           $ref: '#/components/schemas/RequestReference'
     AuthenticationMode:
       type: string
-      enum: ['M0BILE_OTP', 'DIRECT', 'DEMOGRAPHICS', 'AADHAAR_OTP']
+      enum: ['MOBILE_OTP', 'DIRECT', 'DEMOGRAPHICS', 'AADHAAR_OTP']
       description: > 
         Subjected to CM specific capability
          1. MOBILE_OTP - for SMS OTP
          2. DIRECT - for auth through apps (usually direct)
          3. AADHAAR_OTP - for auth using OTP sent to Aadhaar number
          4. DEMOGRAPHICS - for auth using demographic.
-    
     AuthMeta:
       type: object
+      required:
+        - mode
+        - expiry
       properties:
         hint:
           type: string
@@ -3716,7 +3718,6 @@ components:
           example: "2019-12-30T12:01:55Z"
       xml:
         name: Meta
-
     PatientAuthConfirmRequest:
       type: object
       required:

@@ -1053,7 +1053,7 @@ components:
       properties:
         communicationMedium:
           type: string
-          enum: ['M0BILE', 'EMAIL']
+          enum: ['MOBILE', 'EMAIL']
         communicationHint:
           type: string
         communicationExpiry:
@@ -1752,7 +1752,7 @@ components:
                 wrapped: true
     AuthenticationMode:
       type: string
-      enum: ['M0BILE_OTP', 'DIRECT', 'AADHAAR_OTP', 'DEMOGRAPHICS']
+      enum: ['MOBILE_OTP', 'DIRECT', 'AADHAAR_OTP', 'DEMOGRAPHICS']
       description: > 
         Subjected to CM specific capability
          1. MOBILE_OTP - for SMS OTP

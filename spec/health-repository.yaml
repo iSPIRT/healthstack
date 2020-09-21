@@ -777,7 +777,7 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-                
+  
   /v0.5/users/auth/on-fetch-modes:
     post:
       tags:
@@ -1888,7 +1888,7 @@ components:
     
     AuthenticationMode:
       type: string
-      enum: ['M0BILE_OTP', 'DIRECT', 'DEMOGRAPHICS', 'AADHAAR_OTP']
+      enum: ['MOBILE_OTP', 'DIRECT', 'DEMOGRAPHICS', 'AADHAAR_OTP']
       description: > 
         Subjected to CM specific capability
          1. MOBILE_OTP - for SMS OTP
@@ -1898,6 +1898,9 @@ components:
     
     AuthMeta:
       type: object
+      required:
+        - mode
+        - expiry
       properties:
         hint:
           type: string
