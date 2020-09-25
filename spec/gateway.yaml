@@ -1843,7 +1843,7 @@ paths:
         '400':
           description: >
             **Causes:**
-              * tranasction id is not provided or invalid
+              * transaction id is not provided or invalid
               * token or other auth confirmation details not provided or invalid
           content:
             application/json:
@@ -3723,7 +3723,7 @@ components:
       required:
         - requestId
         - timestamp
-        - tranasctionId
+        - transactionId
         - credential
       properties:
         requestId:
@@ -3733,7 +3733,7 @@ components:
           example: 5f7a535d-a3fd-416b-b069-c97d021fbacd
         timestamp:
           $ref: '#/components/schemas/TimestampSchema'
-        tranasctionId:
+        transactionId:
           type: string
         credential:
           type: object
